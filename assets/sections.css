@@ -692,6 +692,7 @@
 }
 .closing .puff {
   position: absolute;
+  width: var(--s, 80px);
   color: var(--kernel, #fecd5a);
   opacity: 0.9;
   z-index: 1;
