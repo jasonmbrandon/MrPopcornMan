@@ -376,7 +376,7 @@ h4 {
   margin-left: -10px;
 }
 .brand img {
-  height: 82px;
+  height: 104px;
   width: auto;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
   transition: height 0.3s var(--ease);
@@ -441,7 +441,7 @@ h4 {
   -webkit-backdrop-filter: blur(14px);
 }
 .site-header.is-stuck .brand img {
-  height: 64px;
+  height: 80px;
 }
 .site-header.is-stuck .header-phone .icon {
   color: var(--red);
@@ -455,7 +455,7 @@ h4 {
   color: var(--red);
 }
 .site-header--solid .brand img {
-  height: 68px;
+  height: 86px;
 }
 .nav-toggle {
   display: none;
@@ -1215,7 +1215,7 @@ html.js [data-reveal].is-in {
 /* ---------- Responsive base ---------- */
 @media (max-width: 1180px) {
   .brand img {
-    height: 72px;
+    height: 92px;
   }
   .site-header .wrap {
     gap: 16px;
@@ -1379,4 +1379,20 @@ html.js [data-reveal].is-in {
   .pop-visual .pop-bucket {
     width: 200px;
   }
+}
+
+/* Phone: keep the larger logo from crowding the menu button */
+@media (max-width: 960px) {
+  .brand img,
+  .site-header--solid .brand img {
+    height: 84px;
+  }
+  .site-header.is-stuck .brand img {
+    height: 70px;
+  }
+}
+/* Let the big top-of-page logo hang below the bar, not off the top edge */
+.site-header:not(.is-stuck) .brand {
+  transform: translateY(10px);
+  transition: transform 0.3s var(--ease);
 }
