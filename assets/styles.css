@@ -1367,3 +1367,16 @@ html.js [data-reveal].is-in {
 .flavor-card__art .puff {
   transition: transform 0.4s var(--ease);
 }
+
+/* Real bucket: a little larger, kernels launch from the top of the heap */
+.pop-visual .pop-bucket {
+  width: min(300px, 64%);
+}
+.pop-visual .pop-kernel {
+  top: 36%;
+}
+@media (max-width: 860px) {
+  .pop-visual .pop-bucket {
+    width: 200px;
+  }
+}
