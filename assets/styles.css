@@ -230,12 +230,14 @@ h4 {
   color: var(--puff, #fecd5a);
   filter: drop-shadow(0 5px 8px rgba(19, 31, 58, 0.22));
 }
-.puff > svg {
+.puff > svg,
+.puff > img {
   width: 100%;
   height: auto;
   display: block;
 }
-.pop-kernel > svg {
+.pop-kernel > svg,
+.pop-kernel > img {
   width: 100%;
   height: auto;
   display: block;
@@ -739,7 +741,8 @@ body.nav-open .nav-toggle .icon-close {
   animation: kernel-pop 0.9s var(--ease-bounce) backwards;
   animation-delay: var(--delay, 0.2s);
 }
-.hero-art .puff svg {
+.hero-art .puff svg,
+.hero-art .puff img {
   width: 100%;
   height: 100%;
   transform: rotate(var(--rot, 0deg));
@@ -951,7 +954,8 @@ body.nav-open .nav-toggle .icon-close {
   animation: kernel-float 7s ease-in-out infinite;
   z-index: 0;
 }
-.page-hero .puff svg {
+.page-hero .puff svg,
+.page-hero .puff img {
   transform: rotate(var(--rot, 0deg));
 }
 .page-hero-scallop {
@@ -1155,7 +1159,9 @@ html.js [data-reveal].is-in {
   color: var(--butter);
 }
 .closing .puff > svg,
-.thanks .puff > svg {
+.thanks .puff > svg,
+.closing .puff > img,
+.thanks .puff > img {
   width: 100%;
   height: auto;
 }
@@ -1322,4 +1328,42 @@ html.js [data-reveal].is-in {
   .hero-meta {
     font-size: 0.66rem;
   }
+}
+
+/* ---------- Real popcorn kernels (replaces the drawn #puff sprite) ---------- */
+.puff img,
+.pop-kernel img {
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+/* .puff already carries a drop shadow; give the bucket kernels their own */
+.pop-kernel img {
+  filter: drop-shadow(0 8px 12px rgba(19, 31, 58, 0.22));
+}
+/* Flavor cards: the old drawn puffs bled off the card edge as decoration.
+   Real kernels read as clipped, so keep them whole in the top-right corner. */
+.flavor-card .flavor-card__art {
+  inset: 0 0 auto 0;
+  height: 62%;
+}
+.flavor-card__art .puff {
+  left: auto !important;
+}
+.flavor-card__art .puff:nth-child(1) {
+  right: 9% !important;
+  top: 14% !important;
+  width: clamp(84px, 8.5vw, 118px) !important;
+}
+.flavor-card__art .puff:nth-child(2) {
+  right: 46% !important;
+  top: 46% !important;
+  width: clamp(40px, 4vw, 56px) !important;
+}
+.flavor-card:hover .flavor-card__art .puff:nth-child(1) {
+  transform: rotate(calc(var(--r, 0deg) + 14deg)) scale(1.06);
+}
+.flavor-card__art .puff {
+  transition: transform 0.4s var(--ease);
 }

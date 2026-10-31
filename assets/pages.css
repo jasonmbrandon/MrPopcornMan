@@ -978,7 +978,8 @@
   z-index: -1;
   animation: kernel-float 8s ease-in-out infinite;
 }
-.thanks .puff svg {
+.thanks .puff svg,
+.thanks .puff img {
   transform: rotate(var(--rot, 0deg));
 }
 
