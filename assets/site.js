@@ -128,6 +128,22 @@
       }
 
       var scale = popVisual ? popVisual.clientWidth / 620 : 1;
+      // Keep the highest kernels below the sticky header: shrink the upward
+      // travel so the tallest arc ends just under the header's bottom edge.
+      var yFit = 1;
+      if (popVisual && popKernels.length) {
+        var vr = popVisual.getBoundingClientRect();
+        var header = document.querySelector('.site-header');
+        var headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+        var originY = vr.top + vr.height * 0.36;
+        var maxUp = 0, maxSize = 0;
+        popKernels.forEach(function (k) {
+          maxUp = Math.max(maxUp, -parseFloat(k.dataset.ty || 0));
+          maxSize = Math.max(maxSize, k.offsetWidth || 0);
+        });
+        var room = originY - headerBottom - maxSize / 2 - 16;
+        if (maxUp > 0) yFit = clamp(room / (maxUp * scale), 0.35, 1);
+      }
       popKernels.forEach(function (k, i) {
         var start = 0.04 + (i / popKernels.length) * 0.6;
         var t = clamp((p - start) / 0.28, 0, 1);
@@ -137,7 +153,7 @@
         }
         var e = easeOut(t);
         var tx = parseFloat(k.dataset.tx || 0) * e * scale;
-        var ty = parseFloat(k.dataset.ty || 0) * e * scale;
+        var ty = parseFloat(k.dataset.ty || 0) * e * scale * yFit;
         var rot = parseFloat(k.dataset.rot || 0) * e;
         var s = 0.35 + 0.65 * e;
         k.style.opacity = String(clamp(t * 3, 0, 1));
